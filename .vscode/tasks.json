@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run SLP.py",
+			"type": "shell",
+			"command": "/Users/jullev/Project/TugasSLP/tugasSLP/.venv/bin/python",
+			"args": [
+				"SLP.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

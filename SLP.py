@@ -1,4 +1,5 @@
 import math
+import os
 
 import pandas as pd
 import numpy as np
@@ -6,8 +7,9 @@ import matplotlib.pyplot as plt
 
 #Paraemeters Setting
 LearningRate = 0.1
-InitialWeght = 0.5
+InitialWeight = 0.5
 Epochs = 5
+OUTPUT_DIR = "output"
 Data =  pd.read_csv("iris_data.csv")
 
 FEATURES = ["x1", "x2", "x3", "x4"]
@@ -19,7 +21,7 @@ def loadData():
     # Load the dataset
     data = pd.read_csv("iris_data.csv")
     # Map the labels to numerical values
-    data['target'] = data['label'].map(LABELS)
+    data['target'] = data['species'].map(LABELS)
     return data
 
 def splitData(df, train_per_class=40):
@@ -89,8 +91,8 @@ def validate(val, w, epoch):
     return log, mse, acc
 
 def run(epochs=Epochs, lr=LearningRate, w0=InitialWeight):
-    df = load_data()
-    train, val = split_data(df)
+    df = loadData()
+    train, val = splitData(df)
  
     w = pd.Series(w0, index=WEIGHTS, dtype=float)
  
@@ -132,7 +134,7 @@ def plot_history(history, out_dir):
     ax.set_ylim(0, 105); ax.legend(["Training", "Validasi"]); ax.grid(alpha=0.3)
     plt.tight_layout(); plt.savefig(os.path.join(out_dir, "accuracy_chart.png"), dpi=150)
  
-    plt.show()
+    plt.close("all")
 
 def main():
     train_log, val_log, history, w = run()
